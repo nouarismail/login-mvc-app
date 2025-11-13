@@ -1,0 +1,42 @@
+
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient();
+
+builder.Services.AddResponseCompression();
+
+builder.Services.AddScoped<LoginMvcApp.Services.IICUTechAuthService, LoginMvcApp.Services.ICUTechAuthService>();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+app.UseStaticFiles(new StaticFileOptions {
+    OnPrepareResponse = ctx => {
+        const int durationInSeconds = 60 * 60 * 24 * 7;
+        ctx.Context.Response.Headers["Cache-Control"] =
+            "public,max-age=" + durationInSeconds;
+    }
+});
+
+app.UseResponseCompression();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Auth}/{action=Login}/{id?}");
+
+app.Run();
