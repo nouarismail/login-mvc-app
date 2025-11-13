@@ -54,8 +54,22 @@
 
 <body>
     <nav class="navbar navbar-expand-md navbar-custom">
-        <span class="navbar-brand fw-bold">SOAP Login App</span>
-        
+        <div class="container">
+            <a class="navbar-brand fw-bold" asp-controller="Auth" asp-action="Login">SOAP Login App</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Auth" asp-action="Login">Sign in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" asp-controller="Auth" asp-action="Register">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
 
     <main class="d-flex align-items-center justify-content-center">
@@ -134,11 +148,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 
-    @section Scripts {
-        @{
-            await Html.RenderPartialAsync("_ValidationScriptsPartial");
-        }
-    }
+    
 </body>
 
 </html>

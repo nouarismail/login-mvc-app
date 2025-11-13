@@ -2,6 +2,8 @@
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
@@ -12,6 +14,7 @@ builder.Services.AddScoped<LoginMvcApp.Services.IICUTechAuthService, LoginMvcApp
 
 var app = builder.Build();
 
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -21,13 +24,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles(new StaticFileOptions {
-    OnPrepareResponse = ctx => {
-        const int durationInSeconds = 60 * 60 * 24 * 7;
-        ctx.Context.Response.Headers["Cache-Control"] =
-            "public,max-age=" + durationInSeconds;
-    }
-});
+
 
 app.UseResponseCompression();
 
