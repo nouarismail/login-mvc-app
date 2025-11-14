@@ -5,131 +5,309 @@
 
 <!doctype html>
 <html lang="en">
-
-
-
 <head>
     <meta charset="utf-8" />
     <title>@ViewData["Title"]</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
 
     <style>
+        :root {
+            --primary: #2563eb;
+        }
+
         body {
-            background: #f3f5fb;
             min-height: 100vh;
+            margin: 0;
+            font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #eff6ff 0, #dbeafe 25%, #e5e7eb 55%, #f9fafb 100%);
         }
 
         .navbar-custom {
-            background: #ffffff;
-            box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04);
         }
 
         .login-card {
-            max-width: 420px;
-            margin: 4rem auto;
-            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
-            border-radius: 1rem;
+            border-radius: 1.25rem;
             border: 0;
+            background-color: #ffffff;
+            box-shadow:
+                0 22px 45px rgba(15, 23, 42, 0.18),
+                0 0 0 1px rgba(148, 163, 184, 0.12);
+            animation: fade-in 0.4s ease-out;
         }
 
         .login-card .card-body {
-            padding: 2.5rem;
+            padding: 2rem 1.9rem 1.8rem;
         }
 
-        @@media (max-width: 576px) {
+        .user-card {
+            border-radius: 1.25rem;
+            background: #0f172a;
+            color: #e5e7eb;
+            box-shadow:
+                0 22px 45px rgba(15, 23, 42, 0.4),
+                0 0 0 1px rgba(15, 23, 42, 0.35);
+            animation: slide-left 0.45s ease-out;
+        }
+
+        .user-card .badge {
+            background: rgba(96, 165, 250, 0.16);
+            border-radius: 999px;
+        }
+
+        .input-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-weight: 500;
+            color: #6b7280;
+        }
+
+        .form-control {
+            border-radius: 0.75rem;
+            border-color: #e5e7eb;
+            padding-top: 0.55rem;
+            padding-bottom: 0.55rem;
+        }
+
+        .form-control:focus {
+            border-color: rgba(37, 99, 235, 0.7);
+            box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.25);
+        }
+
+        .btn-primary {
+            border-radius: 999px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 0.8rem 1.4rem;
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            border: none;
+            box-shadow: 0 16px 30px rgba(37, 99, 235, 0.45);
+        }
+
+        .btn-primary:hover {
+            filter: brightness(1.05);
+        }
+
+        .alert-soft {
+            border-radius: 999px;
+            border: none;
+            padding-inline: 1.1rem;
+            padding-block: 0.6rem;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .alert-success.alert-soft {
+            background-color: rgba(22, 163, 74, 0.12);
+            color: #15803d;
+        }
+
+        .alert-danger.alert-soft {
+            background-color: rgba(220, 38, 38, 0.1);
+            color: #b91c1c;
+        }
+
+        .page-wrapper {
+            padding-top: 1.75rem;
+        }
+
+        @@keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @@keyframes slide-left {
+            from {
+                opacity: 0;
+                transform: translateX(-24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @@media (max-width: 767.98px) {
+            .page-wrapper {
+                padding-top: 1rem;
+            }
+
             .login-card {
-                margin: 2rem 1rem;
+                margin-top: 0.75rem;
             }
         }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-light navbar-custom px-3">
-        <a class="navbar-brand fw-bold" href="/">SOAP Login App</a>
-        <div class="ms-auto">
-            <a class="nav-link d-inline px-2" href="/">Sign in</a>
-            <a class="nav-link d-inline px-2" href="/Auth/Register">Register</a>
+    <nav class="navbar navbar-expand navbar-light navbar-custom px-3 px-sm-4">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-semibold" href="/">SOAP Login App</a>
+
+            <div class="ms-auto d-flex align-items-center gap-2 small">
+                <a class="nav-link px-2" href="/">Sign in</a>
+                <a class="btn btn-sm btn-outline-primary rounded-pill px-3" href="/Auth/Register">
+                    Register
+                </a>
+            </div>
         </div>
     </nav>
 
-    <main class="d-flex align-items-center justify-content-center">
-        <div class="card login-card">
-            <div class="card-body">
-                <h1 class="h3 text-center mb-4">Sign In</h1>
-
-
-
-                @if (Model.Success is bool success)
-                {
-                    var alertType = success ? "success" : "danger";
-                    var alertText = success ? "Login successful" : "Invalid credentials";
-
-                    <div class="alert alert-@alertType" role="alert">
-                        @alertText
-                    </div>
-
-
-                    @if (success && Model.Details != null)
-                    {
-                        <div class="card mt-3">
-                            <div class="card-body">
-                                <h5 class="card-title mb-3">User information</h5>
-
-                                <dl class="row small mb-0">
-                                    <dt class="col-sm-4">Entity ID</dt>
-                                    <dd class="col-sm-8">@Model.Details.EntityId</dd>
-
-                                    <dt class="col-sm-4">Name</dt>
-                                    <dd class="col-sm-8">@Model.Details.FirstName @Model.Details.LastName</dd>
-
-                                    <dt class="col-sm-4">Email</dt>
-                                    <dd class="col-sm-8">@Model.Details.Email</dd>
-
-                                    <dt class="col-sm-4">Mobile</dt>
-                                    <dd class="col-sm-8">@Model.Details.Mobile</dd>
-
-                                    <dt class="col-sm-4">Country ID</dt>
-                                    <dd class="col-sm-8">@Model.Details.CountryID</dd>
-
-                                    <dt class="col-sm-4">FTP Host</dt>
-                                    <dd class="col-sm-8">@Model.Details.FTPHost</dd>
-
-                                    <dt class="col-sm-4">FTP Port</dt>
-                                    <dd class="col-sm-8">@Model.Details.FTPPort</dd>
-                                </dl>
+    <main class="page-wrapper container-fluid">
+        <div class="row min-vh-100">
+            @* LEFT: user info (only when login succeeded) *@
+            @if (Model.Success is bool success && success && Model.Details != null)
+            {
+                <div class="col-lg-4 col-md-5 mb-4 d-flex align-items-start">
+                    <div class="card user-card w-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    <div class="badge text-uppercase small">Signed in</div>
+                                    <h2 class="h4 mt-2 mb-0">@Model.Details.FirstName @Model.Details.LastName</h2>
+                                    <div class="small text-secondary text-opacity-75">
+                                        Entity ID: @Model.Details.EntityId
+                                    </div>
+                                </div>
+                                <i class="bi bi-person-circle fs-1 text-primary"></i>
                             </div>
+
+                            <hr class="border-secondary border-opacity-25" />
+
+                            <dl class="row small mb-0">
+                                <dt class="col-4 text-secondary text-opacity-75">Email</dt>
+                                <dd class="col-8">@Model.Details.Email</dd>
+
+                                <dt class="col-4 text-secondary text-opacity-75">Mobile</dt>
+                                <dd class="col-8">@Model.Details.Mobile</dd>
+
+                                <dt class="col-4 text-secondary text-opacity-75">Country</dt>
+                                <dd class="col-8">@Model.Details.CountryID</dd>
+
+                                <dt class="col-4 text-secondary text-opacity-75">FTP Host</dt>
+                                <dd class="col-8">@Model.Details.FTPHost</dd>
+
+                                <dt class="col-4 text-secondary text-opacity-75">FTP Port</dt>
+                                <dd class="col-8">@Model.Details.FTPPort</dd>
+                            </dl>
                         </div>
-                    }
-                }
-
-                <form asp-action="Login" asp-controller="Auth" method="post" novalidate>
-                    @Html.AntiForgeryToken()
-
-                    <div class="mb-3">
-                        <label asp-for="Username" class="form-label"></label>
-                        <input asp-for="Username" class="form-control" />
-                        <span asp-validation-for="Username" class="text-danger"></span>
                     </div>
-                    <div class="mb-4">
-                        <label asp-for="Password" class="form-label"></label>
-                        <input asp-for="Password" class="form-control" type="password" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
+                </div>
+            }
 
-                    <button type="submit" class="btn btn-primary w-100">
-                        Sign In
-                    </button>
-                </form>
+            @* RIGHT: login form in upper-right style *@
+            <div class="col-lg-4 col-md-6 ms-auto d-flex justify-content-end">
+                <div class="card login-card mt-3 w-100">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <h1 class="h4 mb-1">Sign in</h1>
+                            <p class="text-muted small mb-0">
+                                Enter your SOAP credentials to continue.
+                            </p>
+                        </div>
+
+                        @if (Model.Success is bool successFlag)
+                        {
+                            var alertType = successFlag ? "success" : "danger";
+                            var text = successFlag ? "Login successful." : "Invalid credentials.";
+                            <div class="alert alert-@alertType alert-soft mb-3" role="alert">
+                                <i class="bi @(successFlag ? "bi-check-circle-fill" : "bi-x-circle-fill")"></i>
+                                <span>@text</span>
+                            </div>
+                        }
+
+                        <form asp-action="Login" asp-controller="Auth" method="post" novalidate autocomplete="on">
+                            @Html.AntiForgeryToken()
+
+                            <div class="mb-3">
+                                <label asp-for="Username" class="input-label mb-1"></label>
+                                <input asp-for="Username" class="form-control" autocomplete="username" />
+                                <span asp-validation-for="Username" class="text-danger small"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <label asp-for="Password" class="input-label mb-0"></label>
+                                    <a href="#" class="small text-muted text-decoration-none">Forgot password?</a>
+                                </div>
+
+                                <div class="input-group">
+                                    <input asp-for="Password" class="form-control" type="password"
+                                           id="passwordInput" autocomplete="current-password" />
+                                    <button type="button" class="input-group-text" id="togglePassword"
+                                            aria-label="Show password">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </div>
+                                <span asp-validation-for="Password" class="text-danger small"></span>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div class="form-check small">
+                                    <input class="form-check-input" type="checkbox" value="true" id="rememberMe" />
+                                    <label class="form-check-label" for="rememberMe">
+                                        Remember this device
+                                    </label>
+                                </div>
+                                <span class="small text-muted">Secure SOAP login</span>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">
+                                Sign In
+                            </button>
+
+                            <p class="text-center mt-3 mb-0 small text-muted">
+                                No account?
+                                <a href="/Auth/Register" class="text-decoration-none">Create one</a>
+                            </p>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
-   
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var togglePassword = document.getElementById("togglePassword");
+            var passwordInput = document.getElementById("passwordInput");
 
+            if (!togglePassword || !passwordInput) return;
 
+            togglePassword.addEventListener("click", function () {
+                var isHidden = passwordInput.type === "password";
+                passwordInput.type = isHidden ? "text" : "password";
+
+                var icon = this.querySelector("i");
+                if (icon) {
+                    icon.classList.toggle("bi-eye");
+                    icon.classList.toggle("bi-eye-slash");
+                }
+
+                this.setAttribute("aria-label", isHidden ? "Hide password" : "Show password");
+            });
+        });
+    </script>
 </body>
-
 </html>
